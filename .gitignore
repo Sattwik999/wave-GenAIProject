@@ -1,0 +1,12 @@
+# Ignore environment files
+wave-client/.env
+wave-server/.env
+
+# You may want to keep example env files tracked
+!wave-client/.env.example
+!wave-server/.env.example
+
+# Ignore Node modules in root and packages
+node_modules/
+wave-client/node_modules/
+wave-server/node_modules/

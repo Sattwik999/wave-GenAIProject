@@ -8,6 +8,7 @@ import Journal from './pages/Journal'
 import Crisis from './pages/Crisis'
 import AR from './pages/AR'
 import Settings from './pages/Settings'
+import AnimatedBackground from './components/AnimatedBackground'
 import { useEffect, useState } from 'react'
 import { useTheme } from './services/theme'
 import { supabase, signInWithGoogle, signOut, getUser } from './services/supabaseClient'
@@ -82,9 +83,10 @@ export default function App(){
   const onSwitch = async () => { await signInWithGoogle() }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative">
+      <AnimatedBackground />
       <Headbar email={email} onGoogle={onGoogle} onSignOut={onSignOut} onSwitch={onSwitch} />
-      <main className="max-w-6xl mx-auto p-4 grid gap-4">
+      <main className="max-w-6xl mx-auto p-4 grid gap-4 relative z-10">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/chat" element={<Chat />} />
