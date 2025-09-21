@@ -59,6 +59,30 @@ Client on Vercel:
 3) Optionally, keep `vercel.json` (already present) if you plan to use a custom API domain; otherwise it's safe to leave as is.
 4) Deploy.
 
+## Netlify (client) + Server (Render or other)
+
+This repo includes `netlify.toml` to build and serve the client from Netlify with SPA routing.
+
+Server (choose one):
+- Render: Deploy `wave-server` as described above and copy its public URL
+- Any Node host (Railway, Fly.io, etc.): ensure Express is reachable over HTTPS
+
+Client on Netlify:
+1) In Netlify, New site from Git → pick this repo
+2) Build settings (auto-detected from `netlify.toml`):
+	- Base directory: `wave-client`
+	- Build command: `npm install && npm run build`
+	- Publish directory: `dist`
+3) Environment variables:
+	- VITE_SUPABASE_URL
+	- VITE_SUPABASE_ANON_KEY
+	- VITE_API_BASE = https://YOUR-SERVER-URL (e.g., your Render web service)
+4) Deploy. Netlify will run the Vite build and serve the `dist/` output with correct SPA redirects.
+
+Notes:
+- If you prefer not to set `VITE_API_BASE`, you can proxy `/api` in `netlify.toml` by uncommenting the redirects block and pointing it to your server URL.
+- Ensure you never expose SUPABASE_SERVICE_ROLE on Netlify (client-side). That key must remain server-only.
+
 ## Environment Variables
 
 - `wave-server/.env.example` and `wave-client/.env.example` list the required keys.

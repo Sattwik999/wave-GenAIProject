@@ -15,7 +15,7 @@ services:
       - key: GEMINI_API_KEY
         sync: false
 
-  - type: static
+  - type: static_site
     name: wave-client
     rootDir: wave-client
     buildCommand: npm install && npm run build
